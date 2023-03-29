@@ -18,7 +18,7 @@ export default class App extends Component {
 
   componentDidMount() {
     const contactsLS = JSON.parse(localStorage.getItem('contacts'));
-    if (contactsLS) {
+    if (!contactsLS) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
