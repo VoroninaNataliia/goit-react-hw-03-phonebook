@@ -16,6 +16,19 @@ export default class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contactsLS = JSON.parse(localStorage.getItem('contacts'));
+    if (contactsLS) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   setContact = ({ name, number }) => {
     const checkName = this.state.contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -50,18 +63,6 @@ export default class App extends Component {
       };
     });
   };
-
-  componentDidMount() {
-    if (this.state.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
-
-  componentDidUpdate(prevState) {
-    if (this.state.contacts !== prevState) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
-    }
-  }
 
   render() {
     return (
