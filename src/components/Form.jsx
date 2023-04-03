@@ -14,8 +14,11 @@ export class Form extends Component {
   };
 
   handleSubmit = e => {
+    console.log(e)
     e.preventDefault();
     this.props.onSubmit(this.state);
+    e.target.children.name.value = '';
+    e.target.children.number.value = '';
   };
 
   render() {
